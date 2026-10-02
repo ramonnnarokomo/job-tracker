@@ -1,0 +1,37 @@
+.board-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.board-view__content {
+  min-width: 0;
+  transition: opacity 120ms;
+}
+
+/* While a search is running keep the previous results, slightly faded. */
+.board-view__content.is-refreshing {
+  opacity: 0.6;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.toolbar__search {
+  display: flex;
+  flex: 1 1 260px;
+  align-items: center;
+  gap: 10px;
+  max-width: 420px;
+}
+
+.toolbar__searching {
+  flex: none;
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}

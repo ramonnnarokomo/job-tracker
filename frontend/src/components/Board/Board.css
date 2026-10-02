@@ -1,0 +1,260 @@
+/* The board scrolls sideways inside its own box; the page never does. */
+.board {
+  /* Containing block for the absolutely positioned .visually-hidden texts:
+     without it they would stretch the page width instead of the board. */
+  position: relative;
+  display: grid;
+  grid-auto-columns: minmax(232px, 1fr);
+  grid-auto-flow: column;
+  align-items: start;
+  gap: 12px;
+  padding-bottom: 8px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+/* Column */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 220px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: #eef0f3;
+  transition:
+    background-color 120ms,
+    border-color 120ms,
+    opacity 120ms;
+}
+
+.column--valid {
+  border-style: dashed;
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.column--over {
+  border-style: solid;
+  background: #dbeafe;
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+.column--invalid {
+  opacity: 0.45;
+  filter: grayscale(0.6);
+}
+
+.column__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 4px;
+}
+
+.column__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.column__title::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--status-color);
+}
+
+.column__count {
+  min-width: 26px;
+  padding: 0 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.column__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.column__empty {
+  padding: 24px 8px;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Card */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--status-color);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+  cursor: grab;
+  transition:
+    box-shadow 120ms,
+    opacity 120ms;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgb(16 24 40 / 0.1);
+}
+
+/* Show the focus ring around the whole card, not just the company name. */
+.card:has(.card__open:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.card--dragging {
+  opacity: 0.5;
+}
+
+.card[data-status='REJECTED'] {
+  background: #fafafa;
+}
+
+.card__company {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.card__open {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.card__open:focus-visible {
+  outline: none;
+}
+
+.card__position {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+}
+
+.card__salary {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+/* "Mover a…" menu */
+.move-menu {
+  margin-top: 2px;
+  padding-top: 6px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.8125rem;
+  cursor: default;
+}
+
+.move-menu__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.move-menu__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.move-menu__toggle::after {
+  content: '▾';
+  font-size: 0.75em;
+}
+
+.move-menu[open] > .move-menu__toggle::after {
+  content: '▴';
+}
+
+.move-menu__toggle:hover {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+.move-menu__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.move-menu__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.move-menu__option::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--status-color);
+}
+
+.move-menu__option:hover {
+  border-color: var(--status-color);
+  background: var(--status-soft);
+}

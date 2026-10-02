@@ -1,0 +1,247 @@
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* KPI tiles */
+.stats__kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.kpi--highlight {
+  border-color: #fcd34d;
+  background: #fffbeb;
+}
+
+.kpi dd {
+  margin: 0;
+}
+
+.kpi__label {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.kpi__value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.kpi__hint {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}
+
+/* Chart panels */
+.stats__panels {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow);
+}
+
+.panel__title {
+  font-size: 1rem;
+}
+
+.panel__subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}
+
+/* Weekly bar chart */
+.weekly-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weekly-chart__canvas {
+  width: 100%;
+  overflow: hidden;
+}
+
+.weekly-chart__canvas svg {
+  display: block;
+}
+
+.weekly-chart__empty {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.weekly-chart__baseline {
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+}
+
+.weekly-chart__hit {
+  fill: transparent;
+}
+
+.weekly-chart__column {
+  fill: var(--color-accent);
+}
+
+.weekly-chart__bar:hover .weekly-chart__column {
+  fill: var(--color-accent-hover);
+}
+
+.weekly-chart__bar:hover .weekly-chart__hit {
+  fill: var(--color-surface-muted);
+}
+
+.weekly-chart__value {
+  fill: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.weekly-chart__label {
+  fill: var(--color-text-muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.weekly-chart__table summary {
+  width: fit-content;
+  color: var(--color-accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.weekly-chart__table table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.weekly-chart__table th,
+.weekly-chart__table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.weekly-chart__table th {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+/* Status breakdown */
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breakdown__row {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) 72px;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.875rem;
+}
+
+.breakdown__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.breakdown__label::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--status-color);
+}
+
+.breakdown__track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+  overflow: hidden;
+}
+
+.breakdown__fill {
+  display: block;
+  height: 100%;
+  min-width: 6px;
+  border-radius: 999px;
+  background: var(--status-color);
+}
+
+.breakdown__value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  text-align: right;
+}
+
+.breakdown__share {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+@media (max-width: 960px) {
+  .stats__kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats__panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .kpi {
+    padding: 12px;
+  }
+
+  .kpi__value {
+    font-size: 1.5rem;
+  }
+
+  .breakdown__row {
+    grid-template-columns: 104px minmax(0, 1fr) 64px;
+    gap: 8px;
+  }
+}
