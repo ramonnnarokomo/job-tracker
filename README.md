@@ -5,6 +5,12 @@ Tablero Kanban para llevar el control de las candidaturas de empleo: por aplicar
 - **Backend:** Java 17 + Spring Boot 3.5 (Web, Data JPA, Validation) + H2 + springdoc-openapi (`backend/`)
 - **Frontend:** React 19 + TypeScript + Vite, sin librerías de UI ni de drag & drop (`frontend/`)
 
+## Capturas
+
+![Tablero Kanban con las candidaturas por estado](docs/tablero.png)
+
+![Estadísticas: totales, candidaturas por semana y reparto por estado](docs/estadisticas.png)
+
 ## Arrancar en local
 
 Requisitos: JDK 17+, Maven y Node.js 20.19+ o 22.12+.
