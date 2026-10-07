@@ -30,6 +30,12 @@
   max-width: 420px;
 }
 
+.toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .toolbar__searching {
   flex: none;
   color: var(--color-text-muted);

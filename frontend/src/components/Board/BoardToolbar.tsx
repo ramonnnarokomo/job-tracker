@@ -5,9 +5,19 @@ interface BoardToolbarProps {
   onSearchChange: (value: string) => void
   isSearching: boolean
   onCreate: () => void
+  /** Exports the applications currently on the board; disabled when there are none. */
+  onExport: () => void
+  canExport: boolean
 }
 
-export function BoardToolbar({ search, onSearchChange, isSearching, onCreate }: BoardToolbarProps) {
+export function BoardToolbar({
+  search,
+  onSearchChange,
+  isSearching,
+  onCreate,
+  onExport,
+  canExport,
+}: BoardToolbarProps) {
   const searchId = useId()
 
   return (
@@ -30,9 +40,14 @@ export function BoardToolbar({ search, onSearchChange, isSearching, onCreate }: 
           </span>
         )}
       </div>
-      <button type="button" className="button button--primary" onClick={onCreate}>
-        <span aria-hidden="true">+</span> Nueva candidatura
-      </button>
+      <div className="toolbar__actions">
+        <button type="button" className="button button--secondary" onClick={onExport} disabled={!canExport}>
+          Exportar CSV
+        </button>
+        <button type="button" className="button button--primary" onClick={onCreate}>
+          <span aria-hidden="true">+</span> Nueva candidatura
+        </button>
+      </div>
     </div>
   )
 }

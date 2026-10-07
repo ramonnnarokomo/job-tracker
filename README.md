@@ -41,6 +41,8 @@ Las reglas viven en clases Java puras (`StatusTransitions`, `StatsCalculator` y 
 
 En el frontend, el tablero usa el drag & drop nativo de HTML5 con actualización optimista: la tarjeta se mueve al momento y, si la API rechaza el cambio, vuelve a su sitio y se muestra el motivo. Cada tarjeta tiene también un menú «Mover a…» para usarlo sin ratón.
 
+El botón «Exportar CSV» descarga todas las candidaturas en un CSV separado por `;` y con BOM UTF-8, para que Excel lo abra con las tildes bien y en columnas. Los campos que empiezan por `=`, `+`, `-` o `@` se escapan para evitar inyección de fórmulas.
+
 ## API
 
 | Método | Ruta | Descripción |

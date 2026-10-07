@@ -5,6 +5,8 @@ import { useApplications } from '../../hooks/useApplications'
 import { useDebouncedValue } from '../../hooks/useDebouncedValue'
 import { useToast } from '../../hooks/useToast'
 import type { Application, ApplicationStatus } from '../../types'
+import { applicationsToCsv, csvFileName } from '../../utils/csv'
+import { downloadTextFile } from '../../utils/download'
 import { ApplicationDrawer } from '../ApplicationDrawer/ApplicationDrawer'
 import { ApplicationFormModal } from '../ApplicationForm/ApplicationFormModal'
 import { EmptyState, ErrorState, LoadingState } from '../common/StateMessage'
@@ -55,6 +57,13 @@ export function BoardView() {
     showToast('Candidatura eliminada.')
   }
 
+  function handleExport() {
+    downloadTextFile(csvFileName(), applicationsToCsv(applications), 'text/csv;charset=utf-8')
+    showToast(
+      applications.length === 1 ? 'Exportada 1 candidatura.' : `Exportadas ${applications.length} candidaturas.`,
+    )
+  }
+
   function handleEdit(application: Application) {
     setSelected(null)
     setForm({ application })
@@ -94,6 +103,8 @@ export function BoardView() {
         onSearchChange={setSearch}
         isSearching={isRefreshing}
         onCreate={() => setForm({})}
+        onExport={handleExport}
+        canExport={applications.length > 0}
       />
 
       {/* Data already on screen but the last refresh failed. */}
